@@ -45,11 +45,13 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'user_id'=> 'required|max:10',
             'status' => 'required|max:10',   
             'content' => 'required|max:191',
         ]);
         
         $task = new Task;
+        $task->user_id = $request->user_id;
         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
@@ -97,11 +99,13 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'user_id'=> 'required|max:10',
             'status' => 'required|max:10',   
             'content' => 'required|max:191',
         ]);
         
         $task = Task::find($id);
+        $task->user_id = $request->user_id;
         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
